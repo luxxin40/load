@@ -41,10 +41,10 @@ function init(){
 	shape.y = oneY;
 	shape.scaleX = 1;
 	shape.scaleY = 1;
-	createjs.Tween.get(shape, {loop: true})
-	.to({scaleX: 1.5, scaleY: 1.5}, 2000, createjs.Ease.getElasticInOut(1, 0.3))
+	var tweenOne = createjs.Tween.get(shape)
+	.to({scaleX: 1.5, scaleY: 1.5}, 400, createjs.Ease.backIn)
 	.wait(00)
-	.to({scaleX: 1, scaleY: 1}, 2000, createjs.Ease.getElasticInOut(1, 0.3))
+	.to({scaleX: 1, scaleY: 1}, 400, createjs.Ease.backOut)
 	.wait(00)
 
 	sec.graphics.beginFill("white").drawCircle(300, 200, 20);
@@ -53,12 +53,13 @@ function init(){
 	sec.regY = 200;
 	sec.x = 300;
 	sec.y = 200;
-	sec.scaleX = 1.5;
-	sec.scaleY = 1.5;
-	createjs.Tween.get(sec, {loop: true})
-	.to({scaleX: 1, scaleY: 1}, 2000, createjs.Ease.getElasticInOut(1, 0.3))
+	sec.scaleX = 1;
+	sec.scaleY = 1;
+	var tweenTwo = createjs.Tween.get(sec)
+	.wait(200)
+	.to({scaleX: 1.5, scaleY: 1.5}, 400, createjs.Ease.backIn)
 	.wait(00)
-	.to({scaleX: 1.5, scaleY: 1.5}, 2000, createjs.Ease.getElasticInOut(1, 0.3))
+	.to({scaleX: 1, scaleY: 1}, 400, createjs.Ease.backOut)
 	.wait(00)
 
 	third.graphics.beginFill("white").drawCircle(400, 200, 20);
@@ -69,11 +70,16 @@ function init(){
 	third.y = 200;
 	third.scaleX = 1;
 	third.scaleY = 1;
-	createjs.Tween.get(third, {loop: true})
-	.to({scaleX: 1.5, scaleY: 1.5}, 2000, createjs.Ease.getElasticInOut(1, 0.3))
+	var tweenThree = createjs.Tween.get(third)
+	.wait(400)
+	.to({scaleX: 1.5, scaleY: 1.5}, 400, createjs.Ease.backIn)
 	.wait(00)
-	.to({scaleX: 1, scaleY: 1}, 2000, createjs.Ease.getElasticInOut(1, 0.3))
+	.to({scaleX: 1, scaleY: 1}, 400, createjs.Ease.backOut)
 	.wait(00)
+
+	var timeline = new createjs.Timeline();
+	timeline.addTween(tweenOne, tweenTwo, tweenThree);
+	timeline.loop = -1;
 
 	createjs.Ticker.setFPS(160);
     createjs.Ticker.addEventListener("tick", stage);
